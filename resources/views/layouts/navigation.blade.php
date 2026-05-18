@@ -52,11 +52,13 @@
 
     <div class="p-4 border-t border-slate-800">
         <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="flex w-full items-center gap-3 px-4 py-3 rounded-2xl text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all duration-200 text-left group">
-                <svg class="w-5 h-5 text-slate-400 group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                <span class="font-medium text-sm">Keluar</span>
-            </button>
-        </form>
+    @csrf
+    <button type="submit" class="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-teal-600 transition-colors w-full text-left py-2 px-4 rounded-xl hover:bg-slate-50">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+        <span>Keluar Sistem</span>
+    </button>
+</form>
     </div>
 </nav>
