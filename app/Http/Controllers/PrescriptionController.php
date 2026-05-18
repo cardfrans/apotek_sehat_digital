@@ -34,7 +34,14 @@ class PrescriptionController extends Controller
         $prescription->status = 'pending';
 
         if ($request->hasFile('image')) {
-            $prescription->image_path = $request->file('image')->store('prescriptions', 'public');
+            $image = $request->file('image');
+            
+            // Mengubah file gambar resep menjadi string Base64 yang sah
+            $base64Data = base64_encode(file_get_contents($image));
+            $base64String = 'data:' . $image->getMimeType() . ';base64,' . $base64Data;
+            
+            // Simpan teks panjang tersebut langsung ke properti model resep
+            $prescription->image_path = $base64String; 
         }
 
         $prescription->save();
