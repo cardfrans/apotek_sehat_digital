@@ -52,9 +52,7 @@
                         <td class="px-6 py-5">
                             <div class="relative w-20 h-20 rounded-2xl border border-slate-200 overflow-hidden bg-slate-100 group cursor-zoom-in" 
                                  onclick="openAdminLightbox('{{ \Illuminate\Support\Str::startsWith($prescription->image_path, 'data:image') ? $prescription->image_path : asset($prescription->image_path) }}')">
-                                <img src="{{ \Illuminate\Support\Str::startsWith($prescription->image_path, 'data:image') ? $prescription->image_path : asset($prescription->image_path) }}" 
-                                        alt="Gambar Obat" 
-                                        class="w-full max-w-md rounded-2xl shadow-sm border">
+                                <img src="{{ \Illuminate\Support\Str::startsWith($prescription->image_path, 'data:image') ? $prescription->image_path : asset($prescription->image_path) }}" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
                                 </div>

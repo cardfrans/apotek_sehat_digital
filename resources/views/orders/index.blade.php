@@ -40,7 +40,7 @@
                                 <span class="font-bold text-slate-700 block mb-0.5">Tujuan Pengiriman:</span>
                                 @if($order->address)
                                     {{ $order->address }}, {{ $order->city }}, {{ $order->province }}
-                                @define
+                
                                 @else
                                     <span class="text-amber-600 font-semibold italic bg-amber-50 px-2 py-1 rounded-md border border-amber-100/50">Alamat belum dilengkapi, silakan lakukan checkout</span>
                                 @endif

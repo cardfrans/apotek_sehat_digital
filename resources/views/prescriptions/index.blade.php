@@ -68,9 +68,7 @@
                             <tr class="hover:bg-slate-50/30 transition-colors">
                                 <td class="px-6 py-4">
                                     <div class="w-16 h-16 rounded-xl border border-slate-100 bg-slate-50 overflow-hidden shadow-sm cursor-pointer" onclick="openPatientLightbox('{{ asset('storage/' . $item->image_path) }}')">
-                                        <img src="{{ \Illuminate\Support\Str::startsWith($item->image_path, 'data:image') ? $item->image_path : asset($item->image_path) }}" 
-                                        alt="Foto Obat" 
-                                        class="w-20 h-20 object-cover rounded-xl">">
+                                        <img src="{{ \Illuminate\Support\Str::startsWith($item->image_path, 'data:image') ? $item->image_path : asset($item->image_path) }}" class="w-full h-full object-cover">
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 max-w-xs">
