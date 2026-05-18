@@ -33,7 +33,14 @@ class MedicineController extends Controller
         $medicine->weight = $request->weight;
 
         if ($request->hasFile('image')) {
-            $medicine->image_path = $request->file('image')->store('medicines', 'public');
+            $image = $request->file('image');
+            
+            // Mengubah file gambar resep menjadi string Base64 yang sah
+            $base64Data = base64_encode(file_get_contents($image));
+            $base64String = 'data:' . $image->getMimeType() . ';base64,' . $base64Data;
+            
+            // Simpan teks panjang tersebut langsung ke properti model resep
+            $medicine->image_path = $base64String; 
         }
 
         $medicine->save();
@@ -59,12 +66,15 @@ class MedicineController extends Controller
         $medicine->weight = $request->weight;
 
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada untuk menghemat ruang disk storage
-            if ($medicine->image_path) {
-                Storage::disk('public')->delete($medicine->image_path);
-            }
-            $medicine->image_path = $request->file('image')->store('medicines', 'public');
-        }
+            $image = $request->file('image');
+            
+            // Mengubah file gambar baru menjadi string Base64 yang sah
+            $base64Data = base64_encode(file_get_contents($image));
+            $base64String = 'data:' . $image->getMimeType() . ';base64,' . $base64Data;
+            
+            // Langsung timpa data teks Base64 lama di database dengan yang baru
+            $medicine->image_path = $base64String;
+        }   
 
         $medicine->save();
 
