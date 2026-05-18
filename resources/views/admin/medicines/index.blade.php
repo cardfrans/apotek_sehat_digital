@@ -70,7 +70,7 @@
                             <td class="px-6 py-4 flex items-center gap-4">
                                 <div class="w-12 h-12 rounded-xl border border-slate-100 overflow-hidden bg-slate-50 shrink-0">
                                     @if($med->image_path)
-                                        <img src="{{ \Illuminate\Support\Str::startsWith($prescription->image_path, 'data:image') ? $prescription->image_path : asset($prescription->image_path) }}" 
+                                        <img src="{{ \Illuminate\Support\Str::startsWith($med->image_path, 'data:image') ? $med->image_path : asset($med->image_path) }}" 
                                         alt="Gambar Resep" 
                                         class="w-full max-w-md rounded-2xl shadow-sm border">
                                     @else
