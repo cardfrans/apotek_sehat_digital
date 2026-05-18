@@ -24,10 +24,8 @@ Apotek Sehat Digital adalah sistem informasi manajemen farmasi modern berbasis *
 - Meminimalisir kesalahan pembacaan resep
 
 ## 📊 Laporan Analitik Penjualan
-- Rekap transaksi harian, mingguan, dan bulanan
 - Statistik penjualan obat
 - Visualisasi data berbasis dashboard modern
-- Export laporan ke PDF/Excel
 
 ## 🎨 Antarmuka Modern
 - Desain bertema *Clean Medical Teal*
