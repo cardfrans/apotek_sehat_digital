@@ -79,7 +79,7 @@
         const shippingSelect = document.getElementById('unified-shipping-select');
 
         // CATATAN: Jika Anda menggunakan Solusi 2 (v1), ubah '/api/' di bawah ini menjadi '/v1/'
-        const apiPrefix = '/api/'; 
+        const apiPrefix = '/v1/'; 
 
         // 1. Muat Data Provinsi Pertama Kali
         try {
