@@ -14,10 +14,10 @@
             "dest": "/public/image/"
         },
         {
-            "src": "/api/(.*)",
-            "dest": "/public/index.php"
+            "src": "/(.*)",
+            "dest": "/api/index.php"
         }
-      
+        
     ],
     "env": {
         "APP_ENV": "production",
