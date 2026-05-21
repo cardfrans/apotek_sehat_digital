@@ -39,9 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout/{id}', [OrderController::class, 'checkoutStore'])->name('orders.checkout.store');
 
     // API Jembatan Proxy AJAX RajaOngkir Komerce (Gudang Asal Batam Fixed)
-    Route::get('/api/provinces', [OrderController::class, 'getProvinces']);
-    Route::get('/api/cities/{province_id}', [OrderController::class, 'getCities']);
-    Route::post('/api/check-ongkir', [OrderController::class, 'checkOngkir']);
+    Route::get('/logistik/provinces', [OrderController::class, 'getProvinces']);
+    Route::get('/logistik/cities/{province_id}', [OrderController::class, 'getCities']);
+    Route::post('/logistik/check-ongkir', [OrderController::class, 'checkOngkir']);
     
     // -----------------------------------------------------------------
     // MODUL BARU: KERANJANG BELANJA MANDIRI PASIEN (NON-RESEP)
