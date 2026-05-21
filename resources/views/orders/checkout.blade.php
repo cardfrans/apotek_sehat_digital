@@ -73,31 +73,41 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async function() {
-            const provSelect = document.getElementById('province-select');
-            const citySelect = document.getElementById('city-select');
-            const shippingSelect = document.getElementById('unified-shipping-select');
+    document.addEventListener('DOMContentLoaded', async function() {
+        const provSelect = document.getElementById('province-select');
+        const citySelect = document.getElementById('city-select');
+        const shippingSelect = document.getElementById('unified-shipping-select');
+
+        // CATATAN: Jika Anda menggunakan Solusi 2 (v1), ubah '/api/' di bawah ini menjadi '/v1/'
+        const apiPrefix = '/api/'; 
+
+        // 1. Muat Data Provinsi Pertama Kali
+        try {
+            const res = await fetch(`${apiPrefix}provinces`);
+            const provinces = await res.json();
+            provinces.forEach(p => {
+                const pId = p.province_id || p.id || p.id_province;
+                const pName = p.province || p.name || p.province_name;
+                if(pId && pName) {
+                    provSelect.innerHTML += `<option value="${pId}">${pName}</option>`;
+                }
+            });
+        } catch (e) { 
+            console.error("Gagal mengambil data provinsi."); 
+        }
+
+        // 2. Event Saat Provinsi Diubah (Memuat data Kota)
+        provSelect.addEventListener('change', async function() {
+            document.getElementById('province_name').value = this.options[this.selectedIndex].text;
+            
+            // Reset Dropdown di bawahnya agar bersih
+            citySelect.innerHTML = '<option value="" disabled selected>-- Pilih Kota --</option>';
+            citySelect.disabled = true;
+            shippingSelect.innerHTML = '<option value="" disabled selected>-- Pilih Kota Terlebih Dahulu --</option>';
+            shippingSelect.disabled = true;
 
             try {
-                const res = await fetch('/api/provinces');
-                const provinces = await res.json();
-                provinces.forEach(p => {
-                    const pId = p.province_id || p.id || p.id_province;
-                    const pName = p.province || p.name || p.province_name;
-                    if(pId && pName) {
-                        provSelect.innerHTML += `<option value="${pId}">${pName}</option>`;
-                    }
-                });
-            } catch (e) { console.error("Gagal mengambil data provinsi."); }
-
-            provSelect.addEventListener('change', async function() {
-                document.getElementById('province_name').value = this.options[this.selectedIndex].text;
-                citySelect.innerHTML = '<option value="" disabled selected>-- Pilih Kota --</option>';
-                citySelect.disabled = true;
-                shippingSelect.innerHTML = '<option value="" disabled selected>-- Pilih Kota Terlebih Dahulu --</option>';
-                shippingSelect.disabled = true;
-
-                const res = await fetch('/api/cities/' + this.value);
+                const res = await fetch(`${apiPrefix}cities/${this.value}`);
                 const cities = await res.json();
                 
                 cities.forEach(c => {
@@ -109,67 +119,74 @@
                     }
                 });
                 citySelect.disabled = false;
-            });
-
-            citySelect.addEventListener('change', function() {
-                document.getElementById('city_name').value = this.options[this.selectedIndex].text;
-                shippingSelect.disabled = true;
-                
-                // Memicu trigger event untuk memuat data ongkir kurir otomatis
-                const event = new Event('change');
-                shippingSelect.dispatchEvent(event);
-            });
-
-            // Handle otomatisasi hitung ongkir
-            citySelect.addEventListener('change', async function() {
-                shippingSelect.innerHTML = '<option value="" disabled selected>⏳ Memuat pilihan opsi tarif kurir dari Batam...</option>';
-                shippingSelect.disabled = true;
-
-                try {
-                    const res = await fetch('/api/check-ongkir', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        },
-                        body: JSON.stringify({ 
-                            destination: citySelect.value, 
-                            order_id: "{{ $pendingOrder->id }}"
-                        })
-                    });
-
-                    const services = await res.json();
-                    shippingSelect.innerHTML = '<option value="" disabled selected>-- Pilih Paket Kurir & Tarif Harga --</option>';
-
-                    if(!services || services.length === 0) {
-                        shippingSelect.innerHTML = '<option value="" disabled>❌ Tidak ada kurir yang mendukung rute ini</option>';
-                        return;
-                    }
-
-                    services.forEach(s => {
-                        const optionText = `${s.courier} - ${s.service} (${s.description}) [Estimasi: ${s.etd} Hari] - Rp ${parseInt(s.cost).toLocaleString('id-ID')}`;
-                        shippingSelect.innerHTML += `<option value="${s.cost}" data-courier="${s.courier}">${optionText}</option>`;
-                    });
-
-                    shippingSelect.disabled = false;
-
-                } catch (error) {
-                    shippingSelect.innerHTML = '<option value="" disabled>❌ Gagal memuat data logistik</option>';
-                }
-            });
-
-            shippingSelect.addEventListener('change', function() {
-                const selectedOption = this.options[this.selectedIndex];
-                const ongkirValue = parseInt(this.value);
-                const courierName = selectedOption.getAttribute('data-courier');
-                const basePrice = parseInt(document.getElementById('txt-total').getAttribute('data-base'));
-
-                document.getElementById('shipping_cost_input').value = ongkirValue;
-                document.getElementById('courier_hidden_input').value = courierName;
-
-                document.getElementById('txt-ongkir').innerText = "Rp " + ongkirValue.toLocaleString('id-ID');
-                document.getElementById('txt-total').innerText = "Rp " + (basePrice + ongkirValue).toLocaleString('id-ID');
-            });
+            } catch (error) {
+                citySelect.innerHTML = '<option value="" disabled>❌ Gagal memuat data kota</option>';
+            }
         });
-    </script>
+
+        // 3. Event Saat Kota Diubah (Dua fungsi digabung jadi satu agar tidak terjadi Balapan Data / NaN)
+        citySelect.addEventListener('change', async function() {
+            // Set nama kota ke hidden input
+            document.getElementById('city_name').value = this.options[this.selectedIndex].text;
+            
+            // Reset tampilan total bayar kembali ke harga dasar obat saat kota diganti
+            const basePrice = parseInt(document.getElementById('txt-total').getAttribute('data-base'));
+            document.getElementById('txt-ongkir').innerText = "Rp 0";
+            document.getElementById('txt-total').innerText = "Rp " + basePrice.toLocaleString('id-ID');
+            document.getElementById('shipping_cost_input').value = 0;
+
+            // Tampilkan status loading kurir
+            shippingSelect.innerHTML = '<option value="" disabled selected>⏳ Memuat pilihan opsi tarif kurir dari Batam...</option>';
+            shippingSelect.disabled = true;
+
+            try {
+                const res = await fetch(`${apiPrefix}check-ongkir`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ 
+                        destination: citySelect.value, 
+                        order_id: "{{ $pendingOrder->id }}"
+                    })
+                });
+
+                const services = await res.json();
+                shippingSelect.innerHTML = '<option value="" disabled selected>-- Pilih Paket Kurir & Tarif Harga --</option>';
+
+                if(!services || services.length === 0) {
+                    shippingSelect.innerHTML = '<option value="" disabled>❌ Tidak ada kurir yang mendukung rute ini</option>';
+                    return;
+                }
+
+                services.forEach(s => {
+                    const optionText = `${s.courier} - ${s.service} (${s.description}) [Estimasi: ${s.etd} Hari] - Rp ${parseInt(s.cost).toLocaleString('id-ID')}`;
+                    shippingSelect.innerHTML += `<option value="${s.cost}" data-courier="${s.courier}">${optionText}</option>`;
+                });
+
+                shippingSelect.disabled = false;
+
+            } catch (error) {
+                shippingSelect.innerHTML = '<option value="" disabled>❌ Gagal memuat data logistik</option>';
+            }
+        });
+
+        // 4. Event Saat Paket Kurir Dipilih (Hitung Total Akhir Belanja)
+        shippingSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const ongkirValue = parseInt(this.value);
+            const courierName = selectedOption.getAttribute('data-courier');
+            const basePrice = parseInt(document.getElementById('txt-total').getAttribute('data-base'));
+
+            // Masukkan data ke input hidden form untuk dikirim ke database saat checkout
+            document.getElementById('shipping_cost_input').value = ongkirValue;
+            document.getElementById('courier_hidden_input').value = courierName;
+
+            // Perbarui tampilan teks di layar secara real-time
+            document.getElementById('txt-ongkir').innerText = "Rp " + ongkirValue.toLocaleString('id-ID');
+            document.getElementById('txt-total').innerText = "Rp " + (basePrice + ongkirValue).toLocaleString('id-ID');
+        });
+    });
+</script>
 </x-app-layout>
