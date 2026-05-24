@@ -15,17 +15,12 @@ Apotek Sehat Digital adalah sistem informasi manajemen farmasi modern berbasis *
 - Pemantauan stok obat secara real-time
 - Manajemen batch dan tanggal kedaluwarsa
 - Notifikasi stok minimum otomatis
-- Riwayat mutasi stok masuk dan keluar
 
 ## 💊 Pencatatan Resep Digital
 - Input resep dokter secara digital
 - Validasi dosis dan jumlah obat
 - Riwayat transaksi resep pasien
 - Meminimalisir kesalahan pembacaan resep
-
-## 📊 Laporan Analitik Penjualan
-- Statistik penjualan obat
-- Visualisasi data berbasis dashboard modern
 
 ## 🎨 Antarmuka Modern
 - Desain bertema *Clean Medical Teal*
@@ -59,17 +54,6 @@ Sebelum memulai instalasi, pastikan perangkat Anda telah memenuhi kebutuhan beri
 - MySQL / MariaDB
 - Git
 - XAMPP / Laragon (Opsional)
-
-## Ekstensi PHP yang Dibutuhkan
-- PDO
-- Mbstring
-- OpenSSL
-- Tokenizer
-- XML
-- Ctype
-- JSON
-- BCMath
-- Fileinfo
 
 ---
 
@@ -218,9 +202,7 @@ routes/
 | Role | Hak Akses |
 |---|---|
 | Admin | Mengelola seluruh sistem |
-| Apoteker | Mengelola resep & stok obat |
-| Kasir | Mengelola transaksi penjualan |
-| Owner | Melihat laporan & analitik |
+| User | Melakukan transaksi pembelian |
 
 ---
 
@@ -229,7 +211,6 @@ routes/
 - Integrasi pembayaran digital
 - Sistem notifikasi WhatsApp
 - Multi-cabang apotek
-- AI rekomendasi obat
 - Integrasi barcode scanner
 - Export laporan otomatis
 
