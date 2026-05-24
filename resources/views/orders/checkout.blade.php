@@ -5,8 +5,8 @@
             <p class="text-slate-500 mt-1">Isi alamat rumah Anda untuk menghitung tarif ongkir resmi dari Gudang Utama Batam secara real-time.</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm space-y-5">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div class="lg:col-span-2 bg-white p-5 sm:p-6 rounded-[2rem] border border-slate-100 shadow-sm space-y-5">
                 <form id="checkoutForm" action="{{ route('orders.checkout.store', $pendingOrder->id) }}" method="POST" class="space-y-4">
                     @csrf
                     
@@ -20,7 +20,7 @@
                         <textarea name="address" required rows="3" class="w-full mt-1 border-slate-200 rounded-2xl focus:ring-emerald-500 focus:border-emerald-500 text-sm resize-none" placeholder="Nama jalan, nomor rumah, RT/RW, dan kelurahan..."></textarea>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="text-sm font-semibold text-slate-600 ml-1">Provinsi Tujuan</label>
                             <select id="province-select" required class="w-full mt-1 bg-slate-50 border-slate-200 rounded-2xl py-3 text-sm font-medium focus:ring-emerald-500 focus:border-emerald-500">
@@ -44,7 +44,7 @@
                 </form>
             </div>
 
-            <div class="bg-slate-900 text-white p-6 rounded-[2rem] shadow-xl h-fit flex flex-col justify-between">
+            <div class="user-action-footer bg-slate-900 text-white p-5 sm:p-6 rounded-[2rem] shadow-xl h-fit flex flex-col justify-between">
                 <div>
                     <h3 class="text-lg font-bold tracking-wide border-b border-slate-800 pb-3 mb-4">Ringkasan Belanja</h3>
                     <div class="space-y-3 text-xs font-medium text-slate-400">
@@ -53,7 +53,7 @@
                         <div class="flex justify-between"><span>Ongkos Kirim Paket</span><span id="txt-ongkir" class="text-white">Rp 0</span></div>
                         <div class="flex justify-between"><span>Kemasan Privasi Aman</span><span class="text-emerald-400">FREE</span></div>
                     </div>
-                    <div class="border-t border-slate-800 mt-4 pt-4 flex justify-between items-baseline">
+                    <div class="border-t border-slate-800 mt-4 pt-4 flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2">
                         <span class="text-sm font-bold">Total Bayar</span>
                         <span id="txt-total" data-base="{{ $pendingOrder->total_price }}" class="text-2xl font-extrabold text-emerald-400">Rp {{ number_format($pendingOrder->total_price, 0, ',', '.') }}</span>
                     </div>

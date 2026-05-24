@@ -35,12 +35,12 @@
 <body class="antialiased bg-white text-slate-800 font-sans selection:bg-brand-600 selection:text-white relative">
 
     <header class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 transition-all">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
             <a href="#beranda" class="flex items-center gap-3 group">
                 <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-xl transition-transform group-hover:scale-105">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                 </div>
-                <span class="font-extrabold text-xl tracking-tight text-slate-900">
+                <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900">
                     Apotek<span class="text-brand-600">Sehat</span>
                 </span>
             </a>
@@ -51,18 +51,18 @@
                 <a href="#keunggulan" class="hover:text-brand-600 transition-colors">Keunggulan</a>
             </nav>
 
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 sm:gap-3">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 px-6 h-11 inline-flex items-center justify-center rounded-xl transition-all shadow-sm">
+                        <a href="{{ url('/dashboard') }}" class="text-xs sm:text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 px-3 sm:px-6 h-10 sm:h-11 inline-flex items-center justify-center rounded-xl transition-all shadow-sm">
                             Masuk Dashboard
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-600 hover:text-brand-600 px-4 transition-colors">
+                        <a href="{{ route('login') }}" class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-brand-600 px-2 sm:px-4 transition-colors">
                             Masuk
                         </a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 px-5 h-11 inline-flex items-center justify-center rounded-xl transition-all">
+                            <a href="{{ route('register') }}" class="text-xs sm:text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 px-3 sm:px-5 h-10 sm:h-11 inline-flex items-center justify-center rounded-xl transition-all">
                                 Daftar Baru
                             </a>
                         @endif
@@ -72,14 +72,14 @@
         </div>
     </header>
 
-    <section id="beranda" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 text-center">
+    <section id="beranda" class="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider mb-8 border border-brand-100">
                 <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
                 Manajemen Farmasi Cerdas
             </div>
             
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-tight">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-tight">
                 Digitalisasi Apotek Anda dengan <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-emerald-500">Sempurna.</span>
             </h1>
             
@@ -98,15 +98,15 @@
         </div>
     </section>
 
-    <section id="fitur" class="py-24 bg-slate-50 border-y border-slate-100">
-        <div class="max-w-7xl mx-auto px-6">
+    <section id="fitur" class="py-16 sm:py-24 bg-slate-50 border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Fitur Inti yang Tepat Sasaran</h2>
                 <p class="text-slate-500 font-light">Kami membuang fitur yang tidak perlu dan fokus pada alat komprehensif yang benar-benar mempercepat pekerjaan apoteker.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-200 transition-colors">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-200 transition-colors">
                     <div class="w-12 h-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                     </div>
@@ -114,7 +114,7 @@
                     <p class="text-slate-500 text-sm leading-relaxed">Lacak pergerakan stok obat, kelola *batch* kedaluwarsa, dan dapatkan peringatan otomatis saat stok menipis.</p>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-200 transition-colors">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-200 transition-colors">
                     <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     </div>
@@ -122,7 +122,7 @@
                     <p class="text-slate-500 text-sm leading-relaxed">Digitalisasi resep dokter untuk meminimalisir kesalahan baca, lengkap dengan riwayat medis pasien terintegrasi.</p>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-200 transition-colors">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-200 transition-colors">
                     <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                     </div>
@@ -133,8 +133,8 @@
         </div>
     </section>
 
-    <section id="keunggulan" class="py-24 bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="keunggulan" class="py-16 sm:py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             
             <div class="relative order-2 lg:order-1">
                 <div class="absolute inset-0 bg-gradient-to-tr from-brand-100 to-white rounded-3xl transform -rotate-3 scale-105 -z-10"></div>
@@ -187,9 +187,9 @@
         </div>
     </section>
 
-    <section class="py-20 bg-slate-900 relative overflow-hidden">
+    <section class="py-16 sm:py-20 bg-slate-900 relative overflow-hidden">
         <div class="absolute inset-0 bg-brand-900/20"></div>
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Siap Mengoptimalkan Apotek Anda?</h2>
             <p class="text-slate-400 mb-10 text-lg">Bergabunglah dan rasakan kemudahan manajemen operasional dengan sistem digital kami.</p>
             <a href="{{ route('register') }}" class="inline-flex h-14 px-10 font-bold text-slate-900 bg-white hover:bg-slate-100 rounded-xl items-center justify-center transition-transform hover:scale-105">

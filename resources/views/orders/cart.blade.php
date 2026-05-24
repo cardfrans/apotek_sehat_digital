@@ -24,8 +24,8 @@
                 @php $totalBasePrice = 0; @endphp
                 @forelse($cartItems as $item)
                     @php $totalBasePrice += $item->medicine->price * $item->quantity; @endphp
-                    <div class="bg-white border border-slate-100 rounded-[2rem] p-5 shadow-sm flex items-center justify-between gap-4">
-                        <div class="flex items-center gap-4">
+                    <div class="bg-white border border-slate-100 rounded-[2rem] p-4 sm:p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4 w-full min-w-0">
                             <div class="w-16 h-16 rounded-2xl border border-slate-100 bg-slate-50 overflow-hidden shrink-0">
                                 @if($item->medicine->image_path)
                                     <img src="{{ \Illuminate\Support\Str::startsWith($item->medicine->image_path, 'data:image') ? $item->medicine->image_path : asset($item->medicine->image_path) }}" class="w-full h-full object-cover">
@@ -33,14 +33,14 @@
                                     <div class="w-full h-full flex items-center justify-center text-slate-300"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg></div>
                                 @endif
                             </div>
-                            <div>
+                            <div class="min-w-0">
                                 <h4 class="font-bold text-slate-800 text-sm leading-tight">{{ $item->medicine->name }}</h4>
                                 <p class="text-xs text-emerald-600 font-extrabold mt-1">Rp {{ number_format($item->medicine->price, 0, ',', '.') }} <span class="text-slate-400 font-normal">/ pcs</span></p>
                                 <p class="text-[10px] text-slate-400 font-semibold mt-0.5">Berat: {{ $item->medicine->weight ?? 100 }} gram</p>
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
                             <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-xl border border-slate-100">
                                 <form action="{{ route('cart.update', $item->id) }}" method="POST">
                                     @csrf @method('PATCH')
@@ -73,7 +73,7 @@
             </div>
 
             @if(!$cartItems->isEmpty())
-                <div class="bg-slate-900 text-white p-6 rounded-[2rem] shadow-xl h-fit flex flex-col justify-between">
+                <div class="user-action-footer bg-slate-900 text-white p-5 sm:p-6 rounded-[2rem] shadow-xl h-fit flex flex-col justify-between">
                     <div>
                         <h3 class="text-lg font-bold tracking-wide border-b border-slate-800 pb-3 mb-4">Total Sementara</h3>
                         <div class="flex justify-between items-baseline mb-2">

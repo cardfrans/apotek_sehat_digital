@@ -16,11 +16,11 @@
 
         <div class="grid grid-cols-1 gap-5">
             @forelse($orders as $order)
-                <div class="bg-white border border-slate-100 rounded-[2rem] p-6 shadow-sm flex flex-col justify-between gap-4 hover:border-emerald-100 transition-all duration-300">
+                <div class="bg-white border border-slate-100 rounded-[2rem] p-5 sm:p-6 shadow-sm flex flex-col justify-between gap-4 hover:border-emerald-100 transition-all duration-300">
                     
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div class="space-y-2 max-w-lg">
-                            <div class="flex items-center gap-2.5">
+                            <div class="flex flex-wrap items-center gap-2.5">
                                 <span class="text-xs font-extrabold text-slate-400 uppercase tracking-widest">INV/ORD/{{ $order->id }}</span>
                                 
                                 @if($order->status === 'processing')
@@ -47,7 +47,7 @@
                             </p>
                         </div>
 
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 w-full md:w-fit min-w-[240px]">
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 w-full md:w-fit md:min-w-[240px]">
                             <div class="text-xs font-bold text-slate-700 mb-1 flex items-center gap-1.5">
                                 <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -69,7 +69,7 @@
 
                     @if($order->status === 'pending')
                         <div class="mt-2 pt-4 border-t border-slate-100/70 flex justify-end">
-                            <a href="{{ route('orders.checkout', $order->id) }}" class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold py-3 px-6 rounded-2xl text-xs shadow-md shadow-orange-500/20 transition-all duration-200 active:scale-98">
+                            <a href="{{ route('orders.checkout', $order->id) }}" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold py-3 px-6 rounded-2xl text-xs shadow-md shadow-orange-500/20 transition-all duration-200 active:scale-98 w-full sm:w-auto">
                                 Lengkapi Alamat & Bayar Sekarang
                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>

@@ -12,8 +12,8 @@
             </div>
         @endif
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm h-fit">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div class="bg-white p-5 sm:p-6 rounded-[2rem] border border-slate-100 shadow-sm h-fit">
                 <h2 class="text-xl font-bold text-slate-800 mb-6">Tambah Obat Baru</h2>
                 
                 <form action="{{ route('admin.medicines.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
@@ -24,7 +24,7 @@
                         <input type="text" name="name" required class="w-full mt-1 border-slate-200 rounded-2xl focus:ring-emerald-500 focus:border-emerald-500 text-sm py-3" placeholder="Contoh: Paracetamol 500mg">
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
                             <label class="text-xs font-bold text-slate-600 ml-1">Harga (Rp)</label>
                             <input type="number" name="price" min="0" required class="w-full mt-1 border-slate-200 rounded-2xl focus:ring-emerald-500 focus:border-emerald-500 text-xs py-3" placeholder="0">
@@ -111,7 +111,7 @@
     </div>
 
     <div id="editMedicineModal" class="fixed inset-0 bg-slate-950/50 backdrop-blur-sm z-50 items-center justify-center p-4 shadow-2xl animate-fade-in" style="display: none;" onclick="window.closeEditMedicineModal()">
-        <div class="bg-white w-full max-w-md rounded-[2rem] p-6 border border-slate-100 relative shadow-emerald-950/20" onclick="event.stopPropagation()">
+        <div class="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-[2rem] p-5 sm:p-6 border border-slate-100 relative shadow-emerald-950/20" onclick="event.stopPropagation()">
             
             <div class="flex justify-between items-center mb-6">
                 <div>
@@ -132,7 +132,7 @@
                     <input type="text" name="name" id="edit_name" required class="w-full mt-1 border-slate-200 rounded-2xl focus:ring-emerald-500 focus:border-emerald-500 text-sm py-3">
                 </div>
 
-                <div class="grid grid-cols-3 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
                         <label class="text-sm font-semibold text-slate-600 ml-1">Harga (Rp)</label>
                         <input type="number" name="price" id="edit_price" required class="w-full mt-1 border-slate-200 rounded-2xl focus:ring-emerald-500 focus:border-emerald-500 text-xs py-3">
@@ -152,7 +152,7 @@
                     <input type="file" name="image" accept="image/*" class="w-full mt-1 border border-slate-200 bg-slate-50 text-slate-500 rounded-xl text-xs file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 transition-all">
                 </div>
 
-                <div class="flex gap-3 pt-4">
+                <div class="flex flex-col sm:flex-row gap-3 pt-4">
                     <button type="button" onclick="window.closeEditMedicineModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3.5 rounded-2xl transition-all">Batal</button>
                     <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-emerald-900/10 transition-all">Simpan Perubahan</button>
                 </div>

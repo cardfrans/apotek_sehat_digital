@@ -8,6 +8,134 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700&display=swap" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <style>
+            .mobile-nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: .2rem;
+                border-radius: .9rem;
+                min-width: 0;
+                padding: .45rem .15rem;
+                font-size: 9px;
+                font-weight: 700;
+                line-height: 1;
+                transition: color .2s ease, background-color .2s ease;
+            }
+
+            .mobile-nav-item svg {
+                width: 1.1rem;
+                height: 1.1rem;
+            }
+
+            .mobile-nav-item span {
+                max-width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .mobile-bottom-nav {
+                padding-bottom: calc(.45rem + env(safe-area-inset-bottom, 0px));
+            }
+
+            .product-grid-responsive {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            @media (min-width: 420px) {
+                .product-grid-responsive {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+            }
+
+            @media (min-width: 640px) {
+                .product-grid-responsive {
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 1.25rem;
+                }
+            }
+
+            @media (min-width: 768px) {
+                .product-grid-responsive {
+                    grid-template-columns: repeat(4, minmax(0, 1fr));
+                }
+            }
+
+            @media (min-width: 1280px) {
+                .product-grid-responsive {
+                    grid-template-columns: repeat(5, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 640px) {
+                main > .p-8,
+                main > .max-w-4xl.p-8 {
+                    padding: 1rem !important;
+                    padding-bottom: calc(8.5rem + env(safe-area-inset-bottom, 0px)) !important;
+                }
+
+                main .user-action-footer {
+                    margin-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+                }
+
+                main h1 {
+                    font-size: 1.5rem !important;
+                    line-height: 2rem !important;
+                }
+
+                main h2 {
+                    font-size: 1.25rem !important;
+                    line-height: 1.75rem !important;
+                }
+
+                main table {
+                    display: block;
+                    width: 100%;
+                    max-width: 100%;
+                    overflow-x: auto;
+                    -webkit-overflow-scrolling: touch;
+                    white-space: nowrap;
+                }
+
+                main table tbody,
+                main table thead,
+                main table tr {
+                    width: max-content;
+                    min-width: 100%;
+                }
+
+                main th,
+                main td {
+                    padding-left: 1rem !important;
+                    padding-right: 1rem !important;
+                }
+
+                .mobile-stack {
+                    flex-direction: column !important;
+                    align-items: stretch !important;
+                }
+
+                .mobile-full {
+                    width: 100% !important;
+                }
+
+                #global-chat-launcher {
+                    bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)) !important;
+                    right: .9rem !important;
+                    width: 3rem !important;
+                    height: 3rem !important;
+                }
+
+                #global-chat-window {
+                    bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)) !important;
+                    max-height: calc(100vh - 8.75rem - env(safe-area-inset-bottom, 0px));
+                }
+            }
+        </style>
     </head>
     <body class="font-sans antialiased text-slate-900 bg-[#F8FAFC]">
         <div class="flex h-screen overflow-hidden">
@@ -17,15 +145,21 @@
             <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
                 
                 <header class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-30">
-                    <div class="px-8 py-4 flex justify-between items-center">
-                        <div class="text-sm font-medium text-slate-500">
+                    <div class="px-4 sm:px-8 py-3 sm:py-4 flex justify-between items-center gap-3">
+                        <div class="sm:hidden flex items-center gap-2 min-w-0">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shrink-0">
+                                +
+                            </div>
+                            <span class="font-extrabold text-sm text-slate-900 truncate">Apotek<span class="text-emerald-600">Sehat</span></span>
+                        </div>
+                        <div class="hidden sm:block text-sm font-medium text-slate-500">
                             {{ now()->format('l, d F Y') }}
                         </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold shrink-0">
                                 {{ substr(Auth::user()->name, 0, 1) }}
                             </div>
-                            <span class="text-sm font-semibold text-slate-700">{{ Auth::user()->name }}</span>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700 truncate max-w-[8rem] sm:max-w-none">{{ Auth::user()->name }}</span>
                         </div>
                     </div>
                 </header>
@@ -38,14 +172,17 @@
         </div>
 
         @if(auth()->user()->role === 'customer')
+            @php
+                $hideMobileChatbot = request()->routeIs('cart.*') || request()->routeIs('orders.checkout*');
+            @endphp
             
-            <button onclick="toggleGlobalChatbot()" id="global-chat-launcher" class="fixed bottom-6 right-6 w-16 h-16 bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-2xl shadow-emerald-700/30 hover:bg-emerald-700 hover:scale-105 active:scale-95 transition-all duration-300 z-50 group">
+            <button onclick="toggleGlobalChatbot()" id="global-chat-launcher" class="fixed bottom-24 sm:bottom-6 right-4 sm:right-6 w-14 h-14 sm:w-16 sm:h-16 bg-emerald-600 text-white rounded-full {{ $hideMobileChatbot ? 'hidden sm:flex' : 'flex' }} items-center justify-center shadow-2xl shadow-emerald-700/30 hover:bg-emerald-700 hover:scale-105 active:scale-95 transition-all duration-300 z-40 sm:z-50 group">
                 <svg class="w-7 h-7 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
                 </svg>
             </button>
 
-            <div id="global-chat-window" class="fixed bottom-6 right-6 w-[23rem] h-[32rem] bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 flex flex-col justify-between overflow-hidden z-50 hidden opacity-0 translate-y-4 transition-all duration-300">
+            <div id="global-chat-window" class="fixed bottom-24 sm:bottom-6 right-3 sm:right-6 left-3 sm:left-auto sm:w-[23rem] h-[70vh] max-h-[32rem] bg-white rounded-[1.75rem] sm:rounded-[2.5rem] shadow-2xl border border-slate-100 flex flex-col justify-between overflow-hidden z-50 hidden opacity-0 translate-y-4 transition-all duration-300">
                 
                 <div class="bg-slate-900 p-5 px-6 flex justify-between items-center text-white shadow-md">
                     <div class="flex items-center gap-3">
@@ -82,7 +219,7 @@
             <script>
         // 1. Fungsi Sakelar Buka-Tutup Minimize Jendela Chat AI
         function toggleGlobalChatbot() {
-            const container = document.getElementById('global-chat-container');
+            const container = document.getElementById('global-chat-launcher');
             const windowChat = document.getElementById('global-chat-window');
             const chatBody = document.getElementById('global-chat-body');
             
@@ -92,7 +229,7 @@
                     windowChat.classList.remove('opacity-0', 'translate-y-4');
                     windowChat.classList.add('opacity-100', 'translate-y-0');
                 }, 50);
-                container.classList.add('hidden'); 
+                if (container) container.classList.add('hidden'); 
                 chatBody.scrollTop = chatBody.scrollHeight;
             } else {
                 windowChat.classList.add('opacity-0', 'translate-y-4');
@@ -100,7 +237,7 @@
                 setTimeout(() => {
                     windowChat.classList.add('hidden');
                 }, 300);
-                container.classList.remove('hidden'); 
+                if (container) container.classList.remove('hidden'); 
             }
         }
 

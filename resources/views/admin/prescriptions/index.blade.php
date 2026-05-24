@@ -82,7 +82,7 @@
 
                         <td class="px-6 py-5 text-right">
                             @if($prescription->status === 'pending')
-                                <div class="inline-flex gap-2 justify-end">
+                                <div class="inline-flex flex-wrap gap-2 justify-end">
                                     <form action="{{ route('admin.prescriptions.update', $prescription->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
@@ -114,7 +114,7 @@
     </div>
 
     <div id="orderModal" class="fixed inset-0 bg-slate-950/50 backdrop-blur-sm z-50 items-center justify-center p-4 shadow-xl" style="display: none;">
-        <div class="bg-white w-full max-w-md rounded-[2rem] p-6 border border-slate-100 relative shadow-emerald-950/20" onclick="event.stopPropagation()">
+        <div class="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-[2rem] p-5 sm:p-6 border border-slate-100 relative shadow-emerald-950/20" onclick="event.stopPropagation()">
             <div class="flex justify-between items-center mb-6">
                 <div>
                     <h3 class="text-xl font-bold text-slate-800">Tentukan Obat Resep</h3>
@@ -147,7 +147,7 @@
                     <input type="number" name="quantity" min="1" value="1" required class="w-full mt-1 border-slate-200 rounded-2xl focus:ring-emerald-500 focus:border-emerald-500 text-sm py-3">
                 </div>
 
-                <div class="flex gap-3 pt-4">
+                <div class="flex flex-col sm:flex-row gap-3 pt-4">
                     <button type="button" onclick="window.closeOrderModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3.5 rounded-2xl transition-all">Batal</button>
                     <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-emerald-900/10 transition-all">Setujui & Buat Order</button>
                 </div>
@@ -160,8 +160,8 @@
             <button type="button" class="absolute -top-12 right-0 text-white/80 hover:text-white flex items-center gap-1 text-sm font-semibold" onclick="window.closeAdminLightbox()">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg> Tutup (ESC)
             </button>
-            <div class="bg-white p-3 rounded-[2rem] shadow-2xl max-h-[80vh] w-fit">
-                <img id="lightbox-img" src="" class="max-h-[75vh] w-auto object-contain rounded-2xl">
+            <div class="bg-white p-2 sm:p-3 rounded-[2rem] shadow-2xl max-h-[80vh] max-w-full w-fit">
+                <img id="lightbox-img" src="" class="max-h-[75vh] max-w-full w-auto object-contain rounded-2xl">
             </div>
             <p id="lightbox-caption" class="text-white text-sm font-medium mt-4 bg-slate-900/60 backdrop-blur-md px-4 py-2 rounded-full"></p>
         </div>

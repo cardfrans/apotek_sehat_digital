@@ -6,14 +6,14 @@
                 <p class="text-slate-500 mt-1 text-lg">Berikut adalah ringkasan aktivitas apotek hari ini.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[12rem]">
-                <div class="md:col-span-2 md:row-span-2 bg-emerald-600 rounded-[2rem] p-8 flex flex-col justify-between text-white relative overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 sm:auto-rows-[12rem]">
+                <div class="sm:col-span-2 sm:row-span-2 bg-emerald-600 rounded-[2rem] p-6 sm:p-8 min-h-[18rem] sm:min-h-0 flex flex-col justify-between text-white relative overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                     <div class="relative z-10">
                         <div class="bg-white/20 w-fit p-3 rounded-2xl backdrop-blur-sm mb-4">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                         </div>
                         <h3 class="text-xl font-medium opacity-90">Antrean Resep</h3>
-                        <p class="text-6xl font-bold mt-2 tracking-tight">{{ $totalPendingPrescriptions }}</p> 
+                        <p class="text-5xl sm:text-6xl font-bold mt-2 tracking-tight">{{ $totalPendingPrescriptions }}</p> 
                         <p class="mt-3 text-emerald-100 font-medium">Resep masuk butuh verifikasi segera.</p>
                     </div>
                     <a href="{{ route('admin.prescriptions.index') }}" class="relative z-10 w-fit bg-white text-emerald-700 hover:bg-emerald-50 px-6 py-3 rounded-xl text-sm font-bold shadow-sm transition-all flex items-center gap-2 mt-4">
@@ -23,12 +23,12 @@
                     <div class="absolute -right-16 -bottom-16 w-80 h-80 bg-white/10 rounded-full blur-2xl"></div>
                 </div>
 
-                <div class="bg-white border border-slate-100 rounded-[2rem] p-6 shadow-sm flex flex-col justify-between hover:border-emerald-200 transition-colors group">
+                <div class="bg-white border border-slate-100 rounded-[2rem] p-5 sm:p-6 min-h-[11rem] shadow-sm flex flex-col justify-between hover:border-emerald-200 transition-colors group">
                     <div class="flex justify-between items-start"><div class="bg-blue-50 p-4 rounded-2xl group-hover:bg-blue-100 transition-colors"><svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg></div></div>
                     <div><h3 class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Total Obat</h3><p class="text-3xl font-bold text-slate-800 mt-1">{{ $totalMedicines }} <span class="text-sm font-normal text-slate-400">Variasi</span></p></div>
                 </div>
 
-                <div class="bg-white border border-slate-100 rounded-[2rem] p-6 shadow-sm flex flex-col justify-between hover:border-emerald-200 transition-colors group">
+                <div class="bg-white border border-slate-100 rounded-[2rem] p-5 sm:p-6 min-h-[11rem] shadow-sm flex flex-col justify-between hover:border-emerald-200 transition-colors group">
                     <div class="flex justify-between items-start"><div class="bg-orange-50 p-4 rounded-2xl group-hover:bg-orange-100 transition-colors"><svg class="w-7 h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg></div></div>
                     <div class="grid grid-cols-2 gap-2 border-t border-slate-50 pt-3">
                         <div><h4 class="text-[11px] font-bold text-slate-400 uppercase">Diproses</h4><p class="text-xl font-bold text-slate-800 mt-0.5">{{ $totalProcessing }}</p></div>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="md:col-span-2 bg-white border border-slate-100 rounded-[2rem] p-6 shadow-sm flex flex-col justify-between hover:border-red-200 transition-colors group relative overflow-hidden">
+                <div class="sm:col-span-2 bg-white border border-slate-100 rounded-[2rem] p-5 sm:p-6 shadow-sm flex flex-col justify-between hover:border-red-200 transition-colors group relative overflow-hidden">
                     <div class="flex justify-between items-center relative z-10">
                         <div class="flex items-center gap-3">
                             <div class="p-3 rounded-2xl {{ $lowStockCount > 0 ? 'bg-red-50 text-red-600' : 'bg-slate-50 text-slate-400' }}"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg></div>
@@ -50,9 +50,9 @@
                     </div>
                 </div>
 
-                <div class="md:col-span-2 bg-slate-900 rounded-[2rem] p-8 text-white flex items-center justify-between shadow-lg relative overflow-hidden">
-                    <div><h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Pendapatan Hari Ini</h3><p class="text-4xl font-bold mt-2 tracking-tight">Rp {{ number_format($totalRevenueToday, 0, ',', '.') }}</p></div>
-                    <div class="text-right"><span class="bg-emerald-500/20 text-emerald-400 text-sm font-bold px-4 py-1.5 rounded-full">Live DB</span></div>
+                <div class="sm:col-span-2 bg-slate-900 rounded-[2rem] p-6 sm:p-8 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-lg relative overflow-hidden">
+                    <div><h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Pendapatan Hari Ini</h3><p class="text-2xl sm:text-4xl font-bold mt-2 tracking-tight break-words">Rp {{ number_format($totalRevenueToday, 0, ',', '.') }}</p></div>
+                    <div class="sm:text-right"><span class="bg-emerald-500/20 text-emerald-400 text-sm font-bold px-4 py-1.5 rounded-full">Live DB</span></div>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
         <div class="p-8">
             
             @if($pendingOrder)
-                <div class="mb-6 bg-gradient-to-r from-orange-500 to-amber-600 rounded-[2rem] p-6 text-white shadow-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 animate-pulse">
+                <div class="mb-6 bg-gradient-to-r from-orange-500 to-amber-600 rounded-[2rem] p-5 sm:p-6 text-white shadow-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 animate-pulse">
                     <div class="flex items-center gap-4">
                         <div class="bg-white/20 p-3 rounded-2xl backdrop-blur-md">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -73,16 +73,16 @@
                             <p class="text-orange-100 text-xs font-medium mt-0.5">Apoteker telah meracik obat Anda. Silakan isi alamat pengiriman rumah untuk menghitung ongkir RajaOngkir.</p>
                         </div>
                     </div>
-                    <a href="{{ route('orders.checkout', $pendingOrder->id) }}" class="bg-white text-orange-600 hover:bg-orange-50 font-bold px-5 py-3 rounded-xl text-xs whitespace-nowrap shadow-md transition-all shrink-0">
+                    <a href="{{ route('orders.checkout', $pendingOrder->id) }}" class="bg-white text-orange-600 hover:bg-orange-50 font-bold px-5 py-3 rounded-xl text-xs text-center sm:whitespace-nowrap shadow-md transition-all shrink-0 w-full sm:w-auto">
                         Lengkapi Pengiriman & Bayar
                     </a>
                 </div>
             @endif
 
-            <div class="w-full bg-gradient-to-r from-emerald-600 to-teal-700 rounded-[2.5rem] p-10 text-white mb-10 relative overflow-hidden shadow-lg shadow-emerald-900/5">
+            <div class="w-full bg-gradient-to-r from-emerald-600 to-teal-700 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-white mb-8 sm:mb-10 relative overflow-hidden shadow-lg shadow-emerald-900/5">
                 <div class="max-w-md relative z-10">
                     <span class="bg-white/20 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md uppercase tracking-wider">Layanan Kilat 24 Jam</span>
-                    <h1 class="text-3xl font-bold mt-4 leading-tight">Cari Obat & Penuhi Kebutuhan Sehat Anda</h1>
+                    <h1 class="text-2xl sm:text-3xl font-bold mt-4 leading-tight">Cari Obat & Penuhi Kebutuhan Sehat Anda</h1>
                     <p class="text-emerald-100 text-sm mt-2 font-medium">Butuh obat khusus dengan resep dokter? Unggah resep Anda langsung via sidebar kiri untuk divalidasi apoteker resmi kami.</p>
                 </div>
                 <div class="absolute right-10 bottom-0 top-0 w-80 opacity-15 hidden md:block">
@@ -90,13 +90,13 @@
                 </div>
             </div>
 
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
                 <div>
                     <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Etalase Produk Obat</h2>
                     <p class="text-slate-400 text-sm mt-0.5 font-medium">Beli vitamin dan suplemen harian tanpa ribet.</p>
                 </div>
                 
-                <a href="{{ route('cart.index') }}" id="cart-main-button" class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 py-2.5 px-5 rounded-2xl shadow-sm text-xs font-bold transition-all active:scale-98 relative">
+                <a href="{{ route('cart.index') }}" id="cart-main-button" class="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 py-2.5 px-5 rounded-2xl shadow-sm text-xs font-bold transition-all active:scale-98 relative w-full sm:w-auto">
                     <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path></svg>
                     Lihat Keranjang Belanja
                     @php $currentItems = \App\Models\CartItem::where('user_id', auth()->id())->sum('quantity'); @endphp
@@ -106,7 +106,7 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+            <div class="product-grid-responsive">
                 @forelse($medicines as $product)
                     <div class="bg-white border border-slate-100 rounded-3xl p-4 flex flex-col justify-between hover:shadow-xl hover:border-emerald-100 transition-all duration-300 group cursor-pointer relative product-card">
                         <div>
@@ -122,8 +122,8 @@
                         
                         <div class="mt-4">
                             <div class="text-xs text-slate-400 font-semibold mb-1">Stok {{ $product->stock }} pcs <span class="text-[10px] text-slate-300">({{ $product->weight ?? 100 }}g)</span></div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-base font-extrabold text-slate-800">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                            <div class="flex justify-between items-center gap-3">
+                                <span class="text-sm sm:text-base font-extrabold text-slate-800 break-words">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                                 
                                 <form action="{{ route('cart.store') }}" method="POST" class="form-add-to-cart">
                                     @csrf

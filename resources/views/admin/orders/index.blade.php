@@ -61,19 +61,19 @@
 
                         <td class="px-6 py-5 text-right">
                             @if($order->address)
-                                <form action="{{ route('admin.orders.update-status', $order->id) }}" method="POST" class="inline-flex items-center gap-2 justify-end">
+                                <form action="{{ route('admin.orders.update-status', $order->id) }}" method="POST" class="inline-flex flex-wrap items-center gap-2 justify-end min-w-[18rem]">
                                     @csrf
                                     @method('PATCH')
                                     
-                                    <input type="text" name="tracking_number" value="{{ $order->tracking_number }}" placeholder="Isi Nomor Resi Baru" class="border-slate-200 rounded-xl text-xs py-2 px-3 w-40 focus:ring-emerald-500 focus:border-emerald-500">
+                                    <input type="text" name="tracking_number" value="{{ $order->tracking_number }}" placeholder="Isi Nomor Resi Baru" class="border-slate-200 rounded-xl text-xs py-2 px-3 w-full sm:w-40 focus:ring-emerald-500 focus:border-emerald-500">
                                     
-                                    <select name="status" class="bg-slate-50 border-slate-200 rounded-xl py-1.5 px-2 text-xs font-bold text-slate-700 focus:ring-emerald-500 focus:border-emerald-500">
+                                    <select name="status" class="bg-slate-50 border-slate-200 rounded-xl py-1.5 px-2 text-xs font-bold text-slate-700 focus:ring-emerald-500 focus:border-emerald-500 flex-1 sm:flex-none">
                                         <option value="processing" {{ $order->status === 'processing' ? 'selected' : '' }}>Dikemas</option>
                                         <option value="completed" {{ $order->status === 'completed' ? 'selected' : '' }}>Selesai / Kirim</option>
                                         <option value="cancelled" {{ $order->status === 'cancelled' ? 'selected' : '' }}>Batalkan</option>
                                     </select>
 
-                                    <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-3 rounded-xl text-xs transition-colors">Update</button>
+                                    <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-3 rounded-xl text-xs transition-colors flex-1 sm:flex-none">Update</button>
                                 </form>
                             @else
                                 <span class="text-xs text-slate-400 italic">Menunggu Tindakan User</span>

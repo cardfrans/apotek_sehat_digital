@@ -14,8 +14,8 @@
             </div>
         @endif
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm h-fit">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div class="bg-white p-5 sm:p-6 rounded-[2rem] border border-slate-100 shadow-sm h-fit">
                 <h2 class="text-xl font-bold text-slate-800 mb-6">Kirim Resep Baru</h2>
                 
                 <form action="{{ route('prescriptions.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
@@ -110,8 +110,8 @@
             <button type="button" class="absolute -top-12 right-0 text-white/80 hover:text-white flex items-center gap-1 text-sm font-semibold" onclick="closePatientLightbox()">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg> Tutup (ESC)
             </button>
-            <div class="bg-white p-3 rounded-[2rem] shadow-2xl max-h-[80vh] w-fit">
-                <img id="lightbox-patient-img" src="" class="max-h-[75vh] w-auto object-contain rounded-2xl">
+            <div class="bg-white p-2 sm:p-3 rounded-[2rem] shadow-2xl max-h-[80vh] max-w-full w-fit">
+                <img id="lightbox-patient-img" src="" class="max-h-[75vh] max-w-full w-auto object-contain rounded-2xl">
             </div>
         </div>
     </div>
